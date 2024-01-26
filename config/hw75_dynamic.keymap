@@ -67,7 +67,7 @@
 			label = "SWITCH_TAB";
 			#sensor-binding-cells = <0>;
 			bindings = <&tab_forward>, <&tab_backward>;
-		}
+		};
 	};
 
 	keymap {
@@ -100,6 +100,6 @@
 			icon = [EF 86 93];
 			bindings = <&trans &trans>;
 			sensor-bindings = <&switch_tab>;
-		}
+		};
 	};
 };
