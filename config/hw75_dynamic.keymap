@@ -32,6 +32,26 @@
 				   <&macro_release &kp LSHIFT>,
 				   <&macro_release &kp LALT>;
 		};
+
+		tab_forward: tab-forward {
+			label = "TAB_FORWARD";
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&macro_press   &kp LCTRL>,
+				   <&macro_tap     &kp TAB>,
+				   <&macro_release &kp LCTRL>;
+		};
+
+		tab_backward: tab-backward {
+			label = "TAB_BACKWARD";
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&macro_press   &kp LCTRL>,
+				   <&macro_press   &kp LSHIFT>,
+				   <&macro_tap     &kp TAB>,
+				   <&macro_release &kp LSHIFT>,
+				   <&macro_release &kp LCTRL>;
+		};
 	};
 
 	behaviors {
@@ -41,6 +61,13 @@
 			#sensor-binding-cells = <0>;
 			bindings = <&tasks_forward>, <&tasks_backward>;
 		};
+
+		switch_tab: switch-tab {
+			compatible = "zmk,behavior-sensor-rotate";
+			label = "SWITCH_TAB";
+			#sensor-binding-cells = <0>;
+			bindings = <&tab_forward>, <&tab_backward>;
+		}
 	};
 
 	keymap {
@@ -54,7 +81,7 @@
 		};
 
 		scroll {
-			label = "滚动";
+			label = "滾動";
 			icon = [EF 86 8A];
 			bindings = <&trans &trans>;
 			sensor-bindings = <&inc_dec_mw MW_DN(1) MW_UP(1)>;
@@ -68,18 +95,11 @@
 			profile = <&profile_spring>;
 		};
 
-		arrow_vertical {
-			label = "上下";
+		tab {
+			label = "分頁";
 			icon = [EF 86 93];
 			bindings = <&trans &trans>;
-			sensor-bindings = <&inc_dec_kp UP DOWN>;
-		};
-
-		arrow_horizontal {
-			label = "左右";
-			icon = [EF 86 9C];
-			bindings = <&trans &trans>;
-			sensor-bindings = <&inc_dec_kp LEFT RIGHT>;
-		};
+			sensor-bindings = <&switch_tab>;
+		}
 	};
 };
